@@ -1,0 +1,1 @@
+export { Bookmark, GetBookmark } from './bookmark'

@@ -1,0 +1,1 @@
+export { BookmarkRoute } from './bookmark'
