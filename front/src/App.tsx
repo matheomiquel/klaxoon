@@ -40,10 +40,9 @@ function App() {
   const [movies, setMovie] = useState([emptyBookmark])
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const createBookmark = async function () {
-    const keyWordSplit = updateKeyWord.keyWord.split(',')
     await axios.post(`http://localhost:3000/bookmark`, {
       url: url,
-      keyWord: keyWordSplit
+      keyWord: keyWord
     })
     getBookmark()
   }
@@ -71,9 +70,8 @@ function App() {
   }
 
   const updateBookmarkFunction = async function () {
-    const keyWordSplit = updateKeyWord.keyWord.split(',')
     await axios.put(`http://localhost:3000/bookmark/${updateKeyWord.id}`, {
-      keyWord: keyWordSplit
+      keyWord: updateKeyWord.keyWord
     })
     setModifyBookmark(false)
     getBookmark()

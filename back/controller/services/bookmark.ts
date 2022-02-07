@@ -25,9 +25,8 @@ export class BookmarkService {
     }
 
     async create(req: Request, res: Response): Promise<Response<Bookmark>> {
-        const keyWord = !!req.body.keyWord.length ? req.body.keyWord.reduce((word: string, sentence: string) => `${sentence},${word}`) : ''
         const dataCreate = {
-            keyWord,
+            keyWord: req.body.keyWord,
             url: req.body.url
         }
         try {
@@ -39,8 +38,7 @@ export class BookmarkService {
     }
 
     async update(req: Request, res: Response): Promise<Response> {
-        const keyWord = req.body.keyWord.reduce((word: string, sentence: string) => `${word},${sentence}`)
-        return res.status(204).json(await this.bookmarkDomain.update({ keyWord, id: Number(req.params.id) }))
+        return res.status(204).json(await this.bookmarkDomain.update({ keyWord: req.body.keyWord, id: Number(req.params.id) }))
     }
     async delete(req: Request, res: Response): Promise<Response> {
         return res.status(204).json(await this.bookmarkDomain.delete({ id: Number(req.params.id) }))
